@@ -24,4 +24,4 @@ export const returnCarSchema = carCreateSchema.extend({
 
 export const returnAllCarsSchema = returnCarSchema.array();
 
-export const carUpdateSchema = carCreateSchema.partial();
+export const carUpdateSchema = carCreateSchema.omit({ images: true }).partial();

@@ -1,8 +1,8 @@
-import { Car, Image } from "../../entities";
-import { ICar, ICarReturn } from "../../interfaces/cars.interfaces";
+import { Car, Image } from "../entities";
+import { ICar, ICarReturn } from "../interfaces/cars.interfaces";
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../data-source";
-import { returnCarSchema } from "../../schemas/cars.schema";
+import { AppDataSource } from "../data-source";
+import { returnCarSchema } from "../schemas/cars.schema";
 
 export const createCarService = async (carData: ICar): Promise<ICarReturn> => {
   const imgRepository: Repository<Image> = AppDataSource.getRepository(Image);

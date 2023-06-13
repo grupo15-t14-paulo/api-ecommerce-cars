@@ -7,7 +7,7 @@ export const userSchema = z.object({
   cpf: z.string().length(11),
   password: z.string().min(6).max(255),
   tel: z.string().length(11, { message: "for example number 12912345678" }),
-  dateBirth: z.date(),
+  dateBirth: z.string(),
   description: z.string().nullable(),
   isSeller: z.boolean().default(false),
   address: adressSchema,

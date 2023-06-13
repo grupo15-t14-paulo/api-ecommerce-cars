@@ -18,7 +18,6 @@ export const updateUserService = async (
       address: true,
     },
   });
-  console.log(userData);
 
   const user = userRepository.create({
     ...oldUser[0],

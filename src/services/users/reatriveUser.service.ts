@@ -16,6 +16,5 @@ export const reatriveUserService = async (userId: string): Promise<IUserReturn> 
     },
   });
 
-  console.log(user[0]);
   return returnUserSchema.parse(user[0]);
 };

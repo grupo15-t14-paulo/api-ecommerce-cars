@@ -1,5 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+  ManyToOne,
+} from "typeorm";
 import { Image } from "./image.entities";
+import { User } from "./users.entities";
 
 export enum fuel {
   DIESEL = "Diesel",
@@ -43,9 +51,15 @@ export class Car {
   @Column({ type: "varchar", length: 250 })
   imageCover: string;
 
+  @CreateDateColumn({ type: "date" })
+  createdAt: string | Date;
+
   @Column({ type: "boolean", default: true })
   isAvailable: boolean | undefined | null;
 
   @OneToMany(() => Image, (image) => image.car)
   images: Image[];
+
+  @ManyToOne(() => User, (user) => user.announcement)
+  user: User;
 }

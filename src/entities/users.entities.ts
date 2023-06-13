@@ -1,0 +1,40 @@
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Address } from "./address.entities";
+import { Car } from "./cars.entities";
+
+@Entity("users")
+export class User {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+
+  @Column({ length: 255 })
+  name: string;
+
+  @Column({ length: 255, unique: true })
+  email: string;
+
+  @Column({ length: 11, unique: true })
+  cpf: string;
+
+  @Column({ length: 11, unique: true })
+  tel: string;
+
+  @Column({ type: Date })
+  dateBirth: Date | string;
+
+  @Column({ type: "text", nullable: true })
+  description: string | null | undefined;
+
+  @Column({ default: false })
+  isSeller: boolean;
+
+  @Column({ type: "varchar", length: 120 })
+  password: string;
+
+  @OneToOne(() => Address)
+  @JoinColumn()
+  address: Address;
+
+  @OneToMany(() => Car, (car) => car.user)
+  announcement?: Car[];
+}

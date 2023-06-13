@@ -22,6 +22,7 @@ export const ensureTokenIsValidMiddleware = async (
 
     req.user = {
       id: decode.sub,
+      isSeller: decode.isSeller
     };
     return next();
   });

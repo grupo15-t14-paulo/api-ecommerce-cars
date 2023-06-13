@@ -4,11 +4,13 @@ import { updateUserWhitOutAdressSchema, userSchema } from "../schemas/users.sche
 import {
   createUserController,
   deleteUserController,
+  listUserController,
   reatriveUserController,
   updateUserController,
 } from "../controllers/users.controller";
 import { ensureEmailExistMiddleware } from "../middleware/users/ensureEmailExist.middleware";
 import { ensureUserIdExist } from "../middleware/users/ensureUserIdExist.middleware";
+import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
 
 export const userRoutes: Router = Router();
 
@@ -18,11 +20,15 @@ userRoutes.post(
   ensureEmailExistMiddleware,
   createUserController
 );
-userRoutes.get("/:id", reatriveUserController);
+userRoutes.get("/:id", ensureTokenIsValidMiddleware, listUserController);
+
+userRoutes.use(ensureTokenIsValidMiddleware);
+userRoutes.get("", reatriveUserController);
+
 userRoutes.patch(
-  "/:id",
+  "",
   ensureUserIdExist,
   ensureDataIsValid(updateUserWhitOutAdressSchema),
   updateUserController
 );
-userRoutes.delete("/:id", ensureUserIdExist, deleteUserController);
+userRoutes.delete("", ensureUserIdExist, deleteUserController);

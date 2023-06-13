@@ -4,14 +4,12 @@ import { listAllCarsService } from "../services/cars/listAllCars.service";
 import { updateCarService } from "../services/cars/updateCar.service";
 import { deleteCarService } from "../services/cars/deleteCar.service";
 
-export const createCarController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const createCarController = async (req: Request, res: Response): Promise<void> => {
   try {
     const carData = req.body;
+    const userId = res.locals.user.id;
 
-    const newCar = await createCarService(carData);
+    const newCar = await createCarService(carData, userId);
 
     res.status(201).json(newCar);
   } catch (error) {
@@ -20,10 +18,7 @@ export const createCarController = async (
   }
 };
 
-export const listAllCarsController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const listAllCarsController = async (req: Request, res: Response): Promise<void> => {
   const page = Number(req.query.page) || 1;
   const pageSize = Number(req.query.pageSize) || 12;
 
@@ -35,10 +30,7 @@ export const listAllCarsController = async (
   }
 };
 
-export const updateCarController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+export const updateCarController = async (req: Request, res: Response): Promise<Response> => {
   const carData = req.body;
   const id: string = req.params.id;
 
@@ -47,10 +39,7 @@ export const updateCarController = async (
   return res.json(car);
 };
 
-export const deleteCarController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+export const deleteCarController = async (req: Request, res: Response): Promise<Response> => {
   const id: string = req.params.id;
 
   await deleteCarService(id);

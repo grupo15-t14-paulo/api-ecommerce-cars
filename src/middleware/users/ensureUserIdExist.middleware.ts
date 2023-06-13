@@ -6,11 +6,11 @@ import { AppError } from "../../errors";
 
 export const ensureUserIdExist = async (
   req: Request,
-  resp: Response,
+  res: Response,
   next: NextFunction
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
-  const id = req.params.id;
+  const id = res.locals.user.id;
 
   const findUser: User | null = await userRepository.findOneBy({ id: id });
 

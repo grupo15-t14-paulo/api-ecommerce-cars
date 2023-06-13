@@ -3,11 +3,12 @@ import { ICar, ICarReturn } from "../../interfaces/cars.interfaces";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { returnCarSchema } from "../../schemas/cars.schema";
+import { IImage } from "../../interfaces/image.interfaces";
 
 export const createCarService = async (carData: ICar): Promise<ICarReturn> => {
   const imgRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
-  const images = carData.images.map((imageData) => {
+  const images = carData.images.map((imageData: IImage) => {
     const image = imgRepository.create(imageData);
     return image;
   });
@@ -16,7 +17,7 @@ export const createCarService = async (carData: ICar): Promise<ICarReturn> => {
 
   const carRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
-  const car: Car = carRepository.create({
+  const car: ICar = carRepository.create({
     ...carData,
     images: images,
   });

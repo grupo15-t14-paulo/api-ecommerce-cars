@@ -19,7 +19,6 @@ export const carCreateSchema = z.object({
 
 export const returnCarSchema = carCreateSchema.extend({
   id: z.string().uuid(),
-  images: imageReturnSchema.array(),
 });
 
 export const returnAllCarsSchema = returnCarSchema.array();

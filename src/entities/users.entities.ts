@@ -19,8 +19,8 @@ export class User {
   @Column({ length: 11, unique: true })
   tel: string;
 
-  @Column({ type: Date })
-  dateBirth: Date | string;
+  @Column({ type: "date" })
+  dateBirth: string | Date;
 
   @Column({ type: "text", nullable: true })
   description: string | null | undefined;

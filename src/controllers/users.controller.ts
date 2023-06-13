@@ -13,6 +13,14 @@ export const createUserController = async (req: Request, res: Response): Promise
 };
 
 export const reatriveUserController = async (req: Request, res: Response): Promise<Response> => {
+  const userId = res.locals.user.id;
+
+  const user = await reatriveUserService(userId);
+
+  return res.status(200).json(user);
+};
+
+export const listUserController = async (req: Request, res: Response): Promise<Response> => {
   const userId = req.params.id;
 
   const user = await reatriveUserService(userId);
@@ -21,7 +29,7 @@ export const reatriveUserController = async (req: Request, res: Response): Promi
 };
 
 export const updateUserController = async (req: Request, res: Response): Promise<Response> => {
-  const userId = req.params.id;
+  const userId = res.locals.user.id;
   const body = req.body;
 
   const user = await updateUserService(userId, body);
@@ -30,7 +38,7 @@ export const updateUserController = async (req: Request, res: Response): Promise
 };
 
 export const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
-  const userId = req.params.id;
+  const userId = res.locals.user.id;
 
   await deleteUserService(userId);
 

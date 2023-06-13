@@ -1,12 +1,15 @@
-import { Car, Image } from "../../entities";
+import { Car, Image, User } from "../../entities";
 import { ICar, ICarReturn } from "../../interfaces/cars.interfaces";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { returnCarSchema } from "../../schemas/cars.schema";
 import { IImage } from "../../interfaces/image.interfaces";
 
-export const createCarService = async (carData: ICar): Promise<ICarReturn> => {
+export const createCarService = async (carData: ICar, userId: string): Promise<ICarReturn> => {
   const imgRepository: Repository<Image> = AppDataSource.getRepository(Image);
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
+  const user: User | null = await userRepository.findOneBy({ id: userId });
 
   const images = carData.images.map((imageData: IImage) => {
     const image = imgRepository.create(imageData);
@@ -17,9 +20,10 @@ export const createCarService = async (carData: ICar): Promise<ICarReturn> => {
 
   const carRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
-  const car: ICar = carRepository.create({
+  const car: Car = carRepository.create({
     ...carData,
     images: images,
+    user: user!,
   });
 
   await carRepository.save(car);

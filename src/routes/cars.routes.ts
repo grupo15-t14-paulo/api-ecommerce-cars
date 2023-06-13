@@ -10,15 +10,24 @@ import { carCreateSchema, carUpdateSchema } from "../schemas/cars.schema";
 import { verifyCarExists } from "../middleware/cars/verifyCarExists.middleware";
 import { ensureIsSeller } from "../middleware/ensureIsSeller.middleware";
 import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
+import { ensureIsOwner } from "../middleware/ensureIsSellerAndOwner.middleware";
 
 export const carRoutes: Router = Router();
 
-carRoutes.post("",ensureTokenIsValidMiddleware, ensureIsSeller, ensureDataIsValid(carCreateSchema), createCarController);
+carRoutes.post(
+  "",
+  ensureTokenIsValidMiddleware,
+  ensureIsSeller,
+  ensureDataIsValid(carCreateSchema),
+  createCarController
+);
 carRoutes.get("", listAllCarsController);
+carRoutes.use(ensureTokenIsValidMiddleware);
 carRoutes.patch(
   "/:id",
   verifyCarExists,
+  ensureIsOwner,
   ensureDataIsValid(carUpdateSchema),
   updateCarController
 );
-carRoutes.delete("/:id", verifyCarExists, deleteCarController);
+carRoutes.delete("/:id", ensureIsOwner, verifyCarExists, deleteCarController);

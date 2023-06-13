@@ -20,9 +20,9 @@ export const ensureTokenIsValidMiddleware = async (
       throw new AppError(error.message, 401);
     }
 
-    req.user = {
+    resp.locals.user = {
       id: decode.sub,
-      isSeller: decode.isSeller
+      isSeller: decode.isSeller,
     };
     return next();
   });

@@ -1,10 +1,6 @@
 import { DeepPartial } from "typeorm";
 import { z } from "zod";
-import {
-  carCreateSchema,
-  returnAllCarsSchema,
-  returnCarSchema,
-} from "../schemas/cars.schema";
+import { carCreateSchema, returnAllCarsSchema, returnCarSchema } from "../schemas/cars.schema";
 
 export type ICar = z.infer<typeof carCreateSchema>;
 export type ICarReturn = z.infer<typeof returnCarSchema>;

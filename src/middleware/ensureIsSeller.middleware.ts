@@ -6,7 +6,7 @@ export const ensureIsSeller = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const authenticatedUser = req.user;
+  const authenticatedUser = res.locals.user;
 
   if (authenticatedUser.isSeller === false) {
     throw new AppError("Insufficient permission", 403);

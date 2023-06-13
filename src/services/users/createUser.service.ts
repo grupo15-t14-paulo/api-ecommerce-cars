@@ -1,11 +1,10 @@
+import { hashSync } from "bcryptjs";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { Address, User } from "../../entities";
-import { IUserReturn, IUserWithOutAddress } from "../../interfaces/users.interface";
-import { returnUserSchema, userWithoutAddressSchema } from "../../schemas/users.schema";
-import { hashSync } from "bcryptjs";
-import { AppError } from "../../errors";
+import { User, Address } from "../../entities";
 import { IAddress } from "../../interfaces/address.interface";
+import { IUserWithOutAddress, IUserReturn, IUser } from "../../interfaces/users.interface";
+import { userWithoutAddressSchema, returnUserSchema } from "../../schemas/users.schema";
 
 export const createUserService = async (
   address: IAddress,

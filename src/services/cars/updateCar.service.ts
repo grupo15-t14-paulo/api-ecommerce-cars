@@ -1,13 +1,10 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities";
-import { ICarReturn, IUpdateCar } from "../../interfaces/cars.interfaces";
+import { ICar, ICarReturn, IUpdateCar } from "../../interfaces/cars.interfaces";
 import { returnCarSchema } from "../../schemas/cars.schema";
 
-export const updateCarService = async (
-  carData: IUpdateCar,
-  id: string
-): Promise<ICarReturn> => {
+export const updateCarService = async (carData: IUpdateCar, id: string): Promise<ICarReturn> => {
   const carRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
   const foundCar: Car | null = await carRepository.findOne({
@@ -19,7 +16,7 @@ export const updateCarService = async (
     },
   });
 
-  const car: Car = carRepository.create({
+  const car: ICar = carRepository.create({
     ...foundCar,
     ...carData,
   });

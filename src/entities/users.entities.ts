@@ -36,5 +36,6 @@ export class User {
   address: Address;
 
   @OneToMany(() => Car, (car) => car.user)
+  @JoinColumn()
   announcement?: Car[];
 }

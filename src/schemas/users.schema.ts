@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { adressSchema, returnAdressSchema } from "./address.schema";
+import { returnAllCarsSchema, returnCarSchema } from "./cars.schema";
 
 export const userSchema = z.object({
   name: z.string().min(3).max(255),
@@ -19,6 +20,7 @@ export const returnUserSchema = userSchema
   .extend({
     id: z.string().uuid(),
     address: returnAdressSchema,
+    announcement: z.array(returnCarSchema).optional(),
   })
   .omit({ password: true });
 

@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+} from "typeorm";
 import { Address } from "./address.entities";
 import { Car } from "./cars.entities";
 
@@ -13,10 +20,10 @@ export class User {
   @Column({ length: 255, unique: true })
   email: string;
 
-  @Column({ length: 11, unique: true })
+  @Column({ length: 14, unique: true })
   cpf: string;
 
-  @Column({ length: 11, unique: true })
+  @Column({ length: 15, unique: true })
   tel: string;
 
   @Column({ type: "date" })

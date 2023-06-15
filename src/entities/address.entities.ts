@@ -8,7 +8,7 @@ export class Address {
   @Column({ type: "varchar", length: 255 })
   street: string;
 
-  @Column({ type: "varchar", length: 8 })
+  @Column({ type: "varchar", length: 9 })
   cep: string;
 
   @Column({ type: "varchar", length: 11 })

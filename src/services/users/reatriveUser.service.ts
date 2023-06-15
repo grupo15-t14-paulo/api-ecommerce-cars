@@ -7,14 +7,17 @@ import { returnUserSchema } from "../../schemas/users.schema";
 export const reatriveUserService = async (userId: string): Promise<IUserReturn> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const user = await userRepository.find({
+  const user: User | null = await userRepository.findOne({
     where: {
       id: userId,
     },
     relations: {
       address: true,
+      announcement: {
+        images: true,
+      },
     },
   });
 
-  return returnUserSchema.parse(user[0]);
+  return returnUserSchema.parse(user);
 };

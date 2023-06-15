@@ -14,15 +14,11 @@ import { ensureIsOwner } from "../middleware/ensureIsSellerAndOwner.middleware";
 
 export const carRoutes: Router = Router();
 
-carRoutes.post(
-  "",
-  ensureTokenIsValidMiddleware,
-  ensureIsSeller,
-  ensureDataIsValid(carCreateSchema),
-  createCarController
-);
 carRoutes.get("", listAllCarsController);
+
 carRoutes.use(ensureTokenIsValidMiddleware);
+carRoutes.post("", ensureIsSeller, ensureDataIsValid(carCreateSchema), createCarController);
+
 carRoutes.patch(
   "/:id",
   verifyCarExists,

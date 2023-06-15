@@ -5,9 +5,9 @@ import { returnAllCarsSchema, returnCarSchema } from "./cars.schema";
 export const userSchema = z.object({
   name: z.string().min(3).max(255),
   email: z.string().email({ message: "Invalid email address" }),
-  cpf: z.string().length(11),
+  cpf: z.string().length(14),
   password: z.string().min(6).max(255),
-  tel: z.string().length(11, { message: "for example number 12912345678" }),
+  tel: z.string().length(15, { message: "for example number 12912345678" }),
   dateBirth: z.string(),
   description: z.string().nullable(),
   isSeller: z.boolean().default(false),

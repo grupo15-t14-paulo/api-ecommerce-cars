@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { adressSchema, returnAdressSchema } from "./address.schema";
+import { addressSchema, returnAddressSchema } from "./address.schema";
 import { returnAllCarsSchema, returnCarSchema } from "./cars.schema";
 
 export const userSchema = z.object({
@@ -11,7 +11,7 @@ export const userSchema = z.object({
   dateBirth: z.string(),
   description: z.string().nullable(),
   isSeller: z.boolean().default(false),
-  address: adressSchema,
+  address: addressSchema,
 });
 
 export const userWithoutAddressSchema = userSchema.omit({ address: true });
@@ -19,7 +19,7 @@ export const userWithoutAddressSchema = userSchema.omit({ address: true });
 export const returnUserSchema = userSchema
   .extend({
     id: z.string().uuid(),
-    address: returnAdressSchema,
+    address: returnAddressSchema,
     announcement: z.array(returnCarSchema).optional(),
   })
   .omit({ password: true });

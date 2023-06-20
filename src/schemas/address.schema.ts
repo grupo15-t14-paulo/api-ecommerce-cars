@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const adressSchema = z.object({
+export const addressSchema = z.object({
   street: z.string().min(1).max(255),
   city: z.string().min(1).max(255),
   cep: z.string().min(8),
@@ -9,6 +9,8 @@ export const adressSchema = z.object({
   complement: z.string().nullable(),
 });
 
-export const returnAdressSchema = adressSchema.extend({
+export const returnAddressSchema = addressSchema.extend({
   id: z.string().uuid(),
 });
+
+export const updateUserAddressSchema = addressSchema.partial();

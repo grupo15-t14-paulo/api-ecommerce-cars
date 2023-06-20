@@ -16,6 +16,7 @@ import {
 import { ensureEmailExistMiddleware } from "../middleware/users/ensureEmailExist.middleware";
 import { ensureUserIdExist } from "../middleware/users/ensureUserIdExist.middleware";
 import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
+import { updateUserAddressSchema } from "../schemas/address.schema";
 
 export const userRoutes: Router = Router();
 userRoutes.post("/resetPassword", sendResetPassword);
@@ -29,7 +30,6 @@ userRoutes.post(
 );
 userRoutes.get("/:id", ensureTokenIsValidMiddleware, listUserController);
 
-
 userRoutes.use(ensureTokenIsValidMiddleware);
 userRoutes.get("", reatriveUserController);
 
@@ -37,6 +37,13 @@ userRoutes.patch(
   "",
   ensureUserIdExist,
   ensureDataIsValid(updateUserWhitOutAdressSchema),
+  updateUserController
+);
+
+userRoutes.patch(
+  "/address",
+  ensureUserIdExist,
+  ensureDataIsValid(updateUserAddressSchema),
   updateUserController
 );
 userRoutes.delete("", ensureUserIdExist, deleteUserController);

@@ -45,4 +45,7 @@ export class User {
   @OneToMany(() => Car, (car) => car.user)
   @JoinColumn()
   announcement?: Car[];
+
+  @Column({ nullable: true })
+  reset_token: string;
 }

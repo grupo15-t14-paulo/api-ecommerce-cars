@@ -57,7 +57,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua senha",
-            link: `https://localhost:5173/users/resetPassword/${resetToken}`,
+            link: `http://localhost:5173/resetPassword/${resetToken}`,
           },
         },
         outro:

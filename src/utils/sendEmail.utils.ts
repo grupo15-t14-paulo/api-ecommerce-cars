@@ -43,7 +43,7 @@ class EmailService {
       theme: "default",
       product: {
         name: "Reset Password",
-        link: "http://localhost:3000/users",
+        link: "http://localhost:5173",
       },
     });
 
@@ -57,7 +57,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua senha",
-            link: `https://localhost:3000/resetPassword/${resetToken}`,
+            link: `https://localhost:5173/users/resetPassword/${resetToken}`,
           },
         },
         outro:

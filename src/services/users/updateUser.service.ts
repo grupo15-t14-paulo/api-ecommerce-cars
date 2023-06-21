@@ -10,7 +10,14 @@ export const updateUserService = async (
   userId: string,
   userData: IAddress
 ): Promise<IUserReturn | IAddressReturn> => {
-  const validations: string[] = ["cep", "street", "number", "city", "state"];
+  const validations: string[] = [
+    "cep",
+    "street",
+    "number",
+    "city",
+    "state",
+    "complement",
+  ];
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const addressRepository: Repository<Address> =
     AppDataSource.getRepository(Address);

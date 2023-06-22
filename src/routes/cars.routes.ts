@@ -4,6 +4,7 @@ import {
   deleteCarController,
   listAllCarsController,
   listCarsByUserIdController,
+  listOneCarByIdController,
   updateCarController,
 } from "../controllers/cars.controllers";
 import { ensureDataIsValid } from "../middleware/ensureDataIsValid.middleware";
@@ -19,15 +20,11 @@ export const carRoutes: Router = Router();
 carRoutes.get("", listAllCarsController);
 
 carRoutes.get("/:id", listCarsByUserIdController);
+carRoutes.get("/search/:carId", listOneCarByIdController);
 
 carRoutes.use(ensureTokenIsValidMiddleware);
 
-carRoutes.post(
-  "",
-  ensureIsSeller,
-  ensureDataIsValid(carCreateSchema),
-  createCarController
-);
+carRoutes.post("", ensureIsSeller, ensureDataIsValid(carCreateSchema), createCarController);
 
 carRoutes.patch(
   "/:id",

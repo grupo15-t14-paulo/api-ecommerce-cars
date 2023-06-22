@@ -6,3 +6,5 @@ export type ICar = z.infer<typeof carCreateSchema>;
 export type ICarReturn = z.infer<typeof returnCarSchema>;
 export type IUpdateCar = DeepPartial<z.infer<typeof carCreateSchema>>;
 export type IReturnAllCars = z.infer<typeof returnAllCarsSchema>;
+// export type ICarAndUserReturn = z.infer<typeof returAllInfoCarAndUserSchema>;
+// export type IReturnAllCarsUser = z.infer<typeof returnCarAndUserSchema>;

@@ -1,9 +1,6 @@
 import { Router } from "express";
 import { ensureDataIsValid } from "../middleware/ensureDataIsValid.middleware";
-import {
-  updateUserWhitOutAdressSchema,
-  userSchema,
-} from "../schemas/users.schema";
+import { updateUserWhitOutAdressSchema, userSchema } from "../schemas/users.schema";
 import {
   createUserController,
   deleteUserController,
@@ -28,7 +25,7 @@ userRoutes.post(
   ensureEmailExistMiddleware,
   createUserController
 );
-userRoutes.get("/:id", ensureTokenIsValidMiddleware, listUserController);
+userRoutes.get("/:id", listUserController);
 
 userRoutes.use(ensureTokenIsValidMiddleware);
 userRoutes.get("", reatriveUserController);

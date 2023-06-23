@@ -27,6 +27,8 @@ export const returnCarAndUserSchema = returnCarSchema.extend({
   user: returnUserSchemaWithOutAdress,
 });
 
+export const returnAllCarInfoSchema = returnCarAndUserSchema.array();
+
 export const returnAllCarsSchema = returnCarSchema.array();
 
 export const carUpdateSchema = carCreateSchema.omit({ images: true }).partial();

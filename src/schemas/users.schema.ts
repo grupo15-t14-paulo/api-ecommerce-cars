@@ -24,8 +24,10 @@ export const returnUserSchema = userSchema
   })
   .omit({ password: true });
 
-export const returnUserSchemaWithOutAdress = userWithoutAddressSchema.extend({
-  id: z.string().uuid(),
-});
+export const returnUserSchemaWithOutAdress = userWithoutAddressSchema
+  .extend({
+    id: z.string().uuid(),
+  })
+  .omit({ password: true });
 
 export const updateUserWhitOutAdressSchema = userWithoutAddressSchema.partial();

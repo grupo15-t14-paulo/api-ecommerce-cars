@@ -1,6 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities";
+import { IReturnAllInfoCars } from "../../interfaces/cars.interfaces";
+import { returnAllCarInfoSchema } from "../../schemas/cars.schema";
 
 export const listAllCarsService = async (
   page: number,
@@ -15,7 +17,7 @@ export const listAllCarsService = async (
     minMileage?: string;
     maxMileage?: string;
   }
-): Promise<any> => {
+): Promise<IReturnAllInfoCars> => {
   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
   const skip = (page - 1) * pageSize;
@@ -24,17 +26,7 @@ export const listAllCarsService = async (
     .createQueryBuilder("car")
     .leftJoinAndSelect("car.images", "images")
     .leftJoinAndSelect("car.user", "users")
-    .select([
-      "car",
-      "images",
-      "users.id",
-      "users.name",
-      "users.email",
-      "users.cpf",
-      "users.tel",
-      "users.description",
-      "users.isSeller",
-    ])
+
     .skip(skip)
     .take(pageSize);
 
@@ -72,7 +64,7 @@ export const listAllCarsService = async (
 
   const carsAll = await findCars.getMany();
 
-  // const cars = returnCarAndUserSchema.parse(carsAll);
+  const cars = returnAllCarInfoSchema.parse(carsAll);
 
-  return carsAll;
+  return cars;
 };

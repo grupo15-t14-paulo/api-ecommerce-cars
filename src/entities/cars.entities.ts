@@ -59,7 +59,7 @@ export class Car {
   @Column({ type: "boolean", default: true })
   isAvailable: boolean | undefined | null;
 
-  @OneToMany(() => Image, (image) => image.car)
+  @OneToMany(() => Image, (image) => image.car, { cascade: true })
   images: Image[];
 
   @ManyToOne(() => User, (user) => user.announcement)

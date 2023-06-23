@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  OneToMany,
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Address } from "./address.entities";
 import { Car } from "./cars.entities";
 
@@ -42,7 +35,7 @@ export class User {
   @JoinColumn()
   address: Address;
 
-  @OneToMany(() => Car, (car) => car.user)
+  @OneToMany(() => Car, (car) => car.user, { cascade: true })
   @JoinColumn()
   announcement?: Car[];
 

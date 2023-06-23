@@ -1,8 +1,9 @@
-import { ICarReturn } from "../../interfaces/cars.interfaces";
+import { IReturnAllCarsUser } from "../../interfaces/cars.interfaces";
 import { Car } from "../../entities";
 import { AppDataSource } from "../../data-source";
+import { returnCarAndUserSchema } from "../../schemas/cars.schema";
 
-export const listOneCarById = async (carId: string): Promise<any> => {
+export const listOneCarById = async (carId: string): Promise<IReturnAllCarsUser> => {
   const carsRepository = AppDataSource.getRepository(Car);
 
   const findCar = await carsRepository.findOne({
@@ -15,7 +16,7 @@ export const listOneCarById = async (carId: string): Promise<any> => {
     },
   });
 
-  //   const car = returAllInfoCarAndUserSchema.parse(findCar);
+  const car = returnCarAndUserSchema.parse(findCar);
 
-  return findCar;
+  return car;
 };

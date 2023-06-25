@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { imageCreateSchema } from "./image.schema";
+import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
 import { returnUserSchema, returnUserSchemaWithOutAdress } from "./users.schema";
 
@@ -21,6 +21,7 @@ export const carCreateSchema = z.object({
 export const returnCarSchema = carCreateSchema.extend({
   id: z.string().uuid(),
   createdAt: z.string(),
+  images: z.array(imageReturnSchema),
 });
 
 export const returnCarAndUserSchema = returnCarSchema.extend({

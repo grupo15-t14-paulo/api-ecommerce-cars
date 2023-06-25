@@ -4,7 +4,7 @@ import { User } from "../../entities";
 import { IUserReturn } from "../../interfaces/users.interface";
 import { returnUserSchema } from "../../schemas/users.schema";
 
-export const reatriveUserService = async (userId: string): Promise<IUserReturn> => {
+export const reatriveUserService = async (userId: string): Promise<any> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const user: User | null = await userRepository.findOne({
@@ -19,5 +19,5 @@ export const reatriveUserService = async (userId: string): Promise<IUserReturn> 
     },
   });
 
-  return returnUserSchema.parse(user);
+  return user;
 };

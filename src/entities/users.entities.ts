@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Address } from "./address.entities";
 import { Car } from "./cars.entities";
+import { Comments } from "./comments.entites";
 
 @Entity("users")
 export class User {
@@ -38,6 +39,10 @@ export class User {
   @OneToMany(() => Car, (car) => car.user, { cascade: true })
   @JoinColumn()
   announcement?: Car[];
+
+  @OneToMany(() => Comments, (coments) => coments.user, { cascade: true })
+  @JoinColumn()
+  comments?: Comments[];
 
   @Column({ nullable: true })
   reset_token: string;

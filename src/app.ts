@@ -5,6 +5,7 @@ import { carRoutes } from "./routes/cars.routes";
 import { imgRoutes } from "./routes/images.routes";
 import { userRoutes } from "./routes/users.routes";
 import { loginRoutes } from "./routes/login.routes";
+import { commentsRoutes } from "./routes/commets.routes";
 import cors from "cors";
 
 const app: Application = express();
@@ -15,6 +16,7 @@ app.use("/cars", carRoutes);
 app.use("/images", imgRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
+app.use("/comments", commentsRoutes)
 
 app.use(handleErrors);
 

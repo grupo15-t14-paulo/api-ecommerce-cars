@@ -15,6 +15,7 @@ export const reatriveUserService = async (userId: string): Promise<any> => {
       address: true,
       announcement: {
         images: true,
+        comments: true,
       },
     },
   });

@@ -5,9 +5,11 @@ import {
   OneToMany,
   CreateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { Image } from "./image.entities";
 import { User } from "./users.entities";
+import { Comments } from "./comments.entites";
 
 export enum fuel {
   DIESEL = "Diesel",
@@ -58,6 +60,10 @@ export class Car {
 
   @Column({ type: "boolean", default: true })
   isAvailable: boolean | undefined | null;
+
+  @OneToMany(() => Comments, (comment) => comment.car, { cascade: true })
+  @JoinColumn()
+  comments: Comments[];
 
   @OneToMany(() => Image, (image) => image.car, { cascade: true })
   images: Image[];

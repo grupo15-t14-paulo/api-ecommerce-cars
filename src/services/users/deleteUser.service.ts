@@ -8,7 +8,7 @@ export const deleteUserService = async (id: string): Promise<void> => {
   const user: User | null = await userRepository.findOne({
     where: {
       id: id,
-    },
+    }
   });
 
   await userRepository.remove(user!);

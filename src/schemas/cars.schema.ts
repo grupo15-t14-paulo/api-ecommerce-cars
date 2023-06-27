@@ -1,7 +1,11 @@
+import { Address } from "./../entities/address.entities";
 import { z } from "zod";
 import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
-import { returnUserSchema, returnUserSchemaWithOutAdress } from "./users.schema";
+import {
+  returnUserSchema,
+  returnUserSchemaWithOutAdress,
+} from "./users.schema";
 
 export const carCreateSchema = z.object({
   brand: z.string().min(1).max(100),
@@ -18,10 +22,62 @@ export const carCreateSchema = z.object({
   images: imageCreateSchema.array(),
 });
 
+export const returnSchemaWithoutPassword = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(3).max(255),
+  email: z.string().email({ message: "Invalid email address" }),
+  cpf: z.string().min(11),
+  tel: z.string().min(10, { message: "for example number 62994567899" }),
+  dateBirth: z.string(),
+  description: z.string().nullable(),
+  isSeller: z.boolean().default(false),
+  address: z.object({
+    street: z.string().min(1).max(255),
+    city: z.string().min(1).max(255),
+    cep: z.string().min(8),
+    number: z.string().min(1).max(11),
+    state: z.string().max(150),
+    complement: z.string().nullable(),
+  }),
+  announcement: z.array(
+    z.object({
+      id: z.string().uuid(),
+      brand: z.string().min(1).max(100),
+      model: z.string().min(1).max(100),
+      year: z.string(),
+      typeCar: z.nativeEnum(fuel),
+      mileage: z.number().positive(),
+      color: z.string().min(1).max(100),
+      fipePrice: z.number().positive(),
+      price: z.number().positive(),
+      description: z.string().optional().nullable(),
+      imageCover: z.string().min(1).max(250),
+      isAvailable: z.boolean().optional().nullable(),
+      images: imageCreateSchema.array(),
+      comments: z.array(
+        z.object({
+          id: z.string().uuid(),
+          comment: z.string(),
+          user: z.object({
+            id: z.string().uuid(),
+          }),
+        })
+      ),
+    })
+  ),
+});
+
+export const returnWithComments = z.object({
+  id: z.string().uuid(),
+  comment: z.string(),
+  user: returnUserSchemaWithOutAdress,
+});
+
 export const returnCarSchema = carCreateSchema.extend({
   id: z.string().uuid(),
   createdAt: z.string(),
   images: z.array(imageReturnSchema),
+  comments: z.array(returnWithComments).optional(),
 });
 
 export const returnCarAndUserSchema = returnCarSchema.extend({

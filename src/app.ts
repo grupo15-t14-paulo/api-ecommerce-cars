@@ -6,6 +6,8 @@ import { imgRoutes } from "./routes/images.routes";
 import { userRoutes } from "./routes/users.routes";
 import { loginRoutes } from "./routes/login.routes";
 import { commentsRoutes } from "./routes/commets.routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../swagger.json";
 import cors from "cors";
 
 const app: Application = express();
@@ -16,7 +18,8 @@ app.use("/cars", carRoutes);
 app.use("/images", imgRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
-app.use("/comments", commentsRoutes)
+app.use("/comments", commentsRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(handleErrors);
 

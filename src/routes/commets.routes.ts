@@ -1,4 +1,5 @@
 import { ensureDataIsValid } from "../middleware/ensureDataIsValid.middleware";
+import { ensureIsOwnerOrSeller } from "../middleware/ensureIsSellerOrOwner.middleware";
 import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
 import { commentsCreateSchema } from "../schemas/comments.schema";
 import {
@@ -11,14 +12,17 @@ import { Router } from "express";
 export const commentsRoutes: Router = Router();
 
 commentsRoutes.use(ensureTokenIsValidMiddleware);
+
 commentsRoutes.post(
   "/:id",
   ensureDataIsValid(commentsCreateSchema),
   createCommentsController
 );
+
 commentsRoutes.patch(
   "/:id",
   ensureDataIsValid(commentsCreateSchema),
   updateCommentsController
 );
-commentsRoutes.delete("/:id", deleteCommentsController);
+
+commentsRoutes.delete("/:id", ensureIsOwnerOrSeller, deleteCommentsController);

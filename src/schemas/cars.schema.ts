@@ -120,7 +120,7 @@ export const returnCarAndUserSchema = returnCarSchema.extend({
     user: z.object({
       id: z.string().uuid(),
     }),
-  }))
+  })).optional()
 });
 
 export const returnAllCarInfoSchema = returnCarAndUserSchema.array();

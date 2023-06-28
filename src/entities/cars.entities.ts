@@ -16,6 +16,7 @@ export enum fuel {
   ETANOL = "Etanol",
   GASOLINA = "Gasolina",
   FLEX = "Flex",
+  ELETRICO = "Elétrico",
   HÍBRIDO = "Híbrido",
   DEFAULT = "Não informado",
 }

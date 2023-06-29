@@ -1,5 +1,5 @@
 import { Address } from "./../entities/address.entities";
-import { date, z } from "zod";
+import { z } from "zod";
 import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
 import {
@@ -51,7 +51,7 @@ export const returnSchemaWithoutPasswordAll = z.object({
     z.object({
       id: z.string().uuid(),
       comment: z.string(),
-      createdAt: z.string().or(date()),
+      createdAt:z.date()
     })
   ),
    
@@ -92,7 +92,6 @@ export const returnSchemaWithoutPassword = z.object({
         z.object({
           id: z.string().uuid(),
           comment: z.string(),
-          createdAt: z.string(),
           user: z.object({
             id: z.string().uuid(),
           }),
@@ -119,7 +118,6 @@ export const returnCarAndUserSchema = returnCarSchema.extend({
   comments:z.array(z.object({
     id: z.string().uuid(),
     comment:z.string(),
-    createdAt: z.string(),
     user: z.object({
       id: z.string().uuid(),
     }),

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Car } from "./cars.entities";
 import { User } from "./users.entities";
 
@@ -9,6 +9,9 @@ export class Comments {
 
   @Column({ type: "text", nullable: true })
   comment: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt: string;
 
   @ManyToOne(() => Car, (car) => car.comments)
   car: Car;

@@ -1,4 +1,5 @@
 import { ensureDataIsValid } from "../middleware/ensureDataIsValid.middleware";
+import { ensureIsOwner } from "../middleware/ensureIsSellerAndOwner.middleware";
 import { ensureIsOwnerOrSeller } from "../middleware/ensureIsSellerOrOwner.middleware";
 import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
 import { commentsCreateSchema } from "../schemas/comments.schema";
@@ -21,6 +22,7 @@ commentsRoutes.post(
 
 commentsRoutes.patch(
   "/:id",
+  ensureIsOwner,
   ensureDataIsValid(commentsCreateSchema),
   updateCommentsController
 );

@@ -26,9 +26,8 @@ export const listAllCarsService = async (
     .createQueryBuilder("car")
     .leftJoinAndSelect("car.images", "images")
     .leftJoinAndSelect("car.user", "users")
-
     .skip(skip)
-    .take(pageSize);
+    .take(pageSize)
 
   if (filters.brand) {
     findCars.andWhere("car.brand = :brand", { brand: filters.brand });

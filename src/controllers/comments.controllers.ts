@@ -10,7 +10,7 @@ export const createCommentsController = async (
   const comments = req.body;
   const id = req.params.id;
   const userId = res.locals.user.id;
-
+ 
   const newComment = await createCommentsService(comments, id, userId);
 
   return res.status(201).json(newComment);

@@ -4,11 +4,11 @@
 
 - [1. Sobre o projeto 🚗](#1-sobre-o-projeto-)
 - [2. Links da aplicação 🔗](#2-links-da-aplicação-)
-- [3. Funcionalidades 🧮](#2-links-da-aplicação-)
-- [4. Tecnologias 💻](#3-tecnologias-)
-  - [4.1 Requisitos 📌](#3.1-requisitos-)
-- [5. Instalação da aplicação 💽](#4-instalação-da-aplicação)
-- [6. Time de desenvolvedores 👩🧑‍💻](#5-time-de-desenvolvedores-)
+- [3. Funcionalidades 🧮](#3-links-da-aplicação-)
+- [4. Tecnologias 💻](#4-tecnologias-)
+  - [4.1 Requisitos 📌](#4.1-requisitos-)
+- [5. Instalação da aplicação 💽](#5-instalação-da-aplicação)
+- [6. Time de desenvolvedores 👩🧑‍💻](#6-time-de-desenvolvedores-)
 
 
 
@@ -98,4 +98,5 @@ Utilize o comando `"yarn dev"` para inicializar a aplicação.
   <td align="center"><a href="https://github.com/NathMedeiros" title="GitHub"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/110193923?v=4" width="75px;" alt=""/><br /><sub><b>Nathalia de Oliveira</b></sub></a><br /><a href="https://www.linkedin.com/in/nathalia-de-oliveira-medeiros/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
   </tr>
 </table>
+
 

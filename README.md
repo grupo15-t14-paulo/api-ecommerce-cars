@@ -22,6 +22,8 @@ A Aplicação consiste em um e-commerce voltado a compra e venda de automoveis, 
 
 Repositório API: https://github.com/grupo15-t14-paulo/api-ecommerce-cars
 
+Link para DOC API: http://localhost:3000/api-docs
+
 Repositório Front-end: https://github.com/grupo15-t14-paulo/frontend-ecommerce-cars
 
 

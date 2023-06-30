@@ -23,6 +23,11 @@ export const carCreateSchema = z.object({
   images: imageCreateSchema.array(),
 });
 
+const userSchemaGetOne = z.object({
+  id:z.string(),
+  name:z.string()
+})
+
 export const returnSchemaWithoutPasswordAll = z.object({
   id: z.string().uuid(),
   brand: z.string().min(1).max(100),
@@ -51,10 +56,10 @@ export const returnSchemaWithoutPasswordAll = z.object({
     z.object({
       id: z.string().uuid(),
       comment: z.string(),
-      createdAt:z.date()
+      createdAt: z.date(),
+      user:userSchemaGetOne
     })
   ),
-   
 });
 export const returnSchemaWithoutPassword = z.object({
   id: z.string().uuid(),
@@ -115,13 +120,17 @@ export const returnCarSchema = carCreateSchema.extend({
 
 export const returnCarAndUserSchema = returnCarSchema.extend({
   user: returnUserSchemaWithOutAdress,
-  comments:z.array(z.object({
-    id: z.string().uuid(),
-    comment:z.string(),
-    user: z.object({
-      id: z.string().uuid(),
-    }),
-  })).optional()
+  comments: z
+    .array(
+      z.object({
+        id: z.string().uuid(),
+        comment: z.string(),
+        user: z.object({
+          id: z.string().uuid(),
+        }),
+      })
+    )
+    .optional(),
 });
 
 export const returnAllCarInfoSchema = returnCarAndUserSchema.array();

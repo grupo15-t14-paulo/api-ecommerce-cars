@@ -13,7 +13,7 @@ export const listOneCarById = async (carId: string): Promise<IReturnAnnoucement>
     relations: {
       images: true,
       user: true,
-      comments:true
+      comments:{user:true}
     },
   });
   

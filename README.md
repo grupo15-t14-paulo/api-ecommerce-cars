@@ -59,13 +59,13 @@ Criando sua conta como Comprador você pode:
 
 
 
-## 3.1 Requisitos
+## 4.1 Requisitos
 
 - PostgreSQL database;
 
 
 
-## 4. Instalação da aplicação
+## 5. Instalação da aplicação
 
 - <h3>Front-End</h3>
 
@@ -87,7 +87,7 @@ Utilize o comando `"yarn dev"` para inicializar a aplicação.
 
 
 
-## 5. Time de desenvolvedores
+## 6. Time de desenvolvedores
 
 <table>
   <tr>
@@ -98,5 +98,4 @@ Utilize o comando `"yarn dev"` para inicializar a aplicação.
   <td align="center"><a href="https://github.com/NathMedeiros" title="GitHub"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/110193923?v=4" width="75px;" alt=""/><br /><sub><b>Nathalia de Oliveira</b></sub></a><br /><a href="https://www.linkedin.com/in/nathalia-de-oliveira-medeiros/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
   </tr>
 </table>
-
 

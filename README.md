@@ -2,13 +2,13 @@
 
 <h2>Conteúdo</h2>
 
-- [1. Sobre o projeto 🚗](#1-sobre-o-projeto-)
-- [2. Links da aplicação 🔗](#2-links-da-aplicação-)
-- [3. Funcionalidades 🧮](#3-links-da-aplicação-)
-- [4. Tecnologias 💻](#4-tecnologias-)
-  - [4.1 Requisitos 📌](#4.1-requisitos-)
+- [1. Sobre o projeto 🚗](#1-sobre-o-projeto)
+- [2. Links da aplicação 🔗](#2-links-da-aplicação)
+- [3. Funcionalidades 🧮](#3-funcionalidades)
+- [4. Tecnologias 💻](#4-tecnologias)
+  - [4.1 Requisitos 📌](#41-requisitos)
 - [5. Instalação da aplicação 💽](#5-instalação-da-aplicação)
-- [6. Time de desenvolvedores 👩🧑‍💻](#6-time-de-desenvolvedores-)
+- [6. Time de desenvolvedores 👩🧑‍💻](#6-time-de-desenvolvedores)
 
 
 

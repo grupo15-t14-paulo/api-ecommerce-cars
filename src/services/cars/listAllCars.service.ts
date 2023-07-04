@@ -11,6 +11,7 @@ export const listAllCarsService = async (
     color?: string;
     year?: string;
     model?: string;
+    fuel?: string;
     minPrice?: string;
     maxPrice?: string;
     minMileage?: string;
@@ -42,6 +43,10 @@ export const listAllCarsService = async (
 
   if (filters.year) {
     findCars.andWhere("car.year = :year", { year: filters.year });
+  }
+
+  if (filters.fuel) {
+    findCars.andWhere("car.typeCar = :typeCar", { typeCar: filters.fuel });
   }
 
   if (filters.minPrice) {

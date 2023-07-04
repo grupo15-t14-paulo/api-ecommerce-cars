@@ -23,13 +23,14 @@ export const createCarController = async (req: Request, res: Response): Promise<
 export const listAllCarsController = async (req: Request, res: Response): Promise<void> => {
   const page = Number(req.query.page) || 1;
   const pageSize = Number(req.query.pageSize) || 12;
-  const { brand, model, color, year, minPrice, maxPrice, minMileage, maxMileage } = req.query;
+  const { brand, model, color, year, minPrice, maxPrice, minMileage, maxMileage, fuel } = req.query;
 
   const filters = {
     brand: brand && brand.toString(),
     color: color && color.toString(),
     year: year && year.toString(),
     model: model && model.toString(),
+    fuel: fuel && fuel.toString(),
     minPrice: minPrice && parseInt(minPrice as string),
     maxPrice: maxPrice && parseInt(maxPrice as string),
     minMileage: minMileage && parseInt(minMileage as string),
@@ -39,6 +40,7 @@ export const listAllCarsController = async (req: Request, res: Response): Promis
     color?: string;
     year?: string;
     model?: string;
+    fuel?: string;
     minPrice?: string;
     maxPrice?: string;
     minMileage?: string;

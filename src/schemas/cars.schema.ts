@@ -2,10 +2,7 @@ import { Address } from "./../entities/address.entities";
 import { z } from "zod";
 import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
-import {
-  returnUserSchema,
-  returnUserSchemaWithOutAdress,
-} from "./users.schema";
+import { returnUserSchema, returnUserSchemaWithOutAdress } from "./users.schema";
 import { returnPatchComment, userId } from "./comments.schema";
 
 export const carCreateSchema = z.object({
@@ -24,9 +21,9 @@ export const carCreateSchema = z.object({
 });
 
 const userSchemaGetOne = z.object({
-  id:z.string(),
-  name:z.string()
-})
+  id: z.string(),
+  name: z.string(),
+});
 
 export const returnSchemaWithoutPasswordAll = z.object({
   id: z.string().uuid(),
@@ -57,7 +54,7 @@ export const returnSchemaWithoutPasswordAll = z.object({
       id: z.string().uuid(),
       comment: z.string(),
       createdAt: z.date(),
-      user:userSchemaGetOne
+      user: userSchemaGetOne,
     })
   ),
 });

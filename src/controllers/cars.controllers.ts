@@ -6,10 +6,7 @@ import { deleteCarService } from "../services/cars/deleteCar.service";
 import { listCarsByUserIdService } from "../services/cars/listCarsById.service";
 import { listOneCarById } from "../services/cars/listOneCar.service";
 
-export const createCarController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const createCarController = async (req: Request, res: Response): Promise<void> => {
   try {
     const carData = req.body;
     const userId = res.locals.user.id;
@@ -23,22 +20,10 @@ export const createCarController = async (
   }
 };
 
-export const listAllCarsController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const listAllCarsController = async (req: Request, res: Response): Promise<void> => {
   const page = Number(req.query.page) || 1;
   const pageSize = Number(req.query.pageSize) || 12;
-  const {
-    brand,
-    model,
-    color,
-    year,
-    minPrice,
-    maxPrice,
-    minMileage,
-    maxMileage,
-  } = req.query;
+  const { brand, model, color, year, minPrice, maxPrice, minMileage, maxMileage } = req.query;
 
   const filters = {
     brand: brand && brand.toString(),
@@ -68,10 +53,7 @@ export const listAllCarsController = async (
   }
 };
 
-export const listCarsByUserIdController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const listCarsByUserIdController = async (req: Request, res: Response): Promise<void> => {
   const userId = req.params.userId;
 
   try {
@@ -82,10 +64,7 @@ export const listCarsByUserIdController = async (
   }
 };
 
-export const listOneCarByIdController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const listOneCarByIdController = async (req: Request, res: Response): Promise<void> => {
   const carId = req.params.carId;
 
   try {
@@ -96,10 +75,7 @@ export const listOneCarByIdController = async (
   }
 };
 
-export const updateCarController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+export const updateCarController = async (req: Request, res: Response): Promise<Response> => {
   const carData = req.body;
   const id: string = req.params.id;
 
@@ -108,10 +84,7 @@ export const updateCarController = async (
   return res.json(car);
 };
 
-export const deleteCarController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+export const deleteCarController = async (req: Request, res: Response): Promise<Response> => {
   const id: string = req.params.id;
 
   await deleteCarService(id);

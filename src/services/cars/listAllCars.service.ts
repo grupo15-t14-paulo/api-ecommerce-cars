@@ -1,8 +1,14 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities";
-import { IReturnAllInfoCars } from "../../interfaces/cars.interfaces";
 import { returnAllCarInfoSchema } from "../../schemas/cars.schema";
+
+type IReturnAllInfoCars = {
+  cars: Car[];
+  nextPage: number | null;
+  prevPage: number | null;
+  totalPages: number;
+};
 
 export const listAllCarsService = async (
   page: number,
@@ -26,8 +32,7 @@ export const listAllCarsService = async (
     .createQueryBuilder("car")
     .leftJoinAndSelect("car.images", "images")
     .leftJoinAndSelect("car.user", "users")
-    .skip(skip)
-    .take(pageSize)
+    .skip(skip);
 
   if (filters.brand) {
     findCars.andWhere("car.brand = :brand", { brand: filters.brand });
@@ -61,9 +66,19 @@ export const listAllCarsService = async (
     findCars.andWhere("car.mileage <= :maxMileage", { maxMileage: parseInt(filters.maxMileage) });
   }
 
-  const carsAll = await findCars.getMany();
+  const [cars, totalCount] = await findCars.getManyAndCount();
 
-  const cars = returnAllCarInfoSchema.parse(carsAll);
+  const allCars = returnAllCarInfoSchema.parse(cars);
 
-  return cars;
+  const totalPages = Math.ceil(totalCount / (pageSize || totalCount)) || 1;
+
+  const nextPage = page < totalPages ? page + 1 : null;
+  const prevPage = page > 1 ? page - 1 : null;
+
+  return {
+    nextPage,
+    prevPage,
+    totalPages,
+    cars: cars,
+  };
 };

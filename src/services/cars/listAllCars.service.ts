@@ -1,14 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities";
-import { returnAllCarInfoSchema } from "../../schemas/cars.schema";
-
-type IReturnAllInfoCars = {
-  cars: Car[];
-  nextPage: number | null;
-  prevPage: number | null;
-  totalPages: number;
-};
+import { IReturnAllInfoCarsType, returnAllCarInfoSchema } from "../../schemas/cars.schema";
 
 export const listAllCarsService = async (
   page: number,
@@ -23,7 +16,7 @@ export const listAllCarsService = async (
     minMileage?: string;
     maxMileage?: string;
   }
-): Promise<IReturnAllInfoCars> => {
+): Promise<IReturnAllInfoCarsType> => {
   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
   const skip = (page - 1) * pageSize;
@@ -32,7 +25,8 @@ export const listAllCarsService = async (
     .createQueryBuilder("car")
     .leftJoinAndSelect("car.images", "images")
     .leftJoinAndSelect("car.user", "users")
-    .skip(skip);
+    .skip(skip)
+    .take(pageSize);
 
   if (filters.brand) {
     findCars.andWhere("car.brand = :brand", { brand: filters.brand });
@@ -67,7 +61,6 @@ export const listAllCarsService = async (
   }
 
   const [cars, totalCount] = await findCars.getManyAndCount();
-
   const allCars = returnAllCarInfoSchema.parse(cars);
 
   const totalPages = Math.ceil(totalCount / (pageSize || totalCount)) || 1;
@@ -79,6 +72,6 @@ export const listAllCarsService = async (
     nextPage,
     prevPage,
     totalPages,
-    cars: cars,
+    cars: allCars,
   };
 };

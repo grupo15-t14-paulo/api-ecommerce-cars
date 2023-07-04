@@ -4,6 +4,7 @@ import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
 import { returnUserSchema, returnUserSchemaWithOutAdress } from "./users.schema";
 import { returnPatchComment, userId } from "./comments.schema";
+import { IReturnAllInfoCars } from "../interfaces/cars.interfaces";
 
 export const carCreateSchema = z.object({
   brand: z.string().min(1).max(100),
@@ -135,3 +136,10 @@ export const returnAllCarInfoSchema = returnCarAndUserSchema.array();
 export const returnAllCarsSchema = returnCarSchema.array();
 
 export const carUpdateSchema = carCreateSchema.omit({ images: true }).partial();
+
+export type IReturnAllInfoCarsType = {
+  cars: IReturnAllInfoCars;
+  nextPage: number | null;
+  prevPage: number | null;
+  totalPages: number | number;
+};

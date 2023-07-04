@@ -2,13 +2,13 @@
 
 <h2>Conteúdo</h2>
 
-- [1. Sobre o projeto 🚗](#1-sobre-o-projeto-)
-- [2. Links da aplicação 🔗](#2-links-da-aplicação-)
-- [3. Funcionalidades 🧮](#2-links-da-aplicação-)
-- [4. Tecnologias 💻](#3-tecnologias-)
-  - [4.1 Requisitos 📌](#3.1-requisitos-)
-- [5. Instalação da aplicação 💽](#4-instalação-da-aplicação)
-- [6. Time de desenvolvedores 👩🧑‍💻](#5-time-de-desenvolvedores-)
+- [1. Sobre o projeto 🚗](#1-sobre-o-projeto)
+- [2. Links da aplicação 🔗](#2-links-da-aplicação)
+- [3. Funcionalidades 🧮](#3-funcionalidades)
+- [4. Tecnologias 💻](#4-tecnologias)
+  - [4.1 Requisitos 📌](#41-requisitos)
+- [5. Instalação da aplicação 💽](#5-instalação-da-aplicação)
+- [6. Time de desenvolvedores 👩🧑‍💻](#6-time-de-desenvolvedores)
 
 
 
@@ -21,6 +21,8 @@ A Aplicação consiste em um e-commerce voltado a compra e venda de automoveis, 
 ## 2. Links da aplicação
 
 Repositório API: https://github.com/grupo15-t14-paulo/api-ecommerce-cars
+
+Link para DOC API: http://localhost:3000/api-docs
 
 Repositório Front-end: https://github.com/grupo15-t14-paulo/frontend-ecommerce-cars
 
@@ -59,13 +61,13 @@ Criando sua conta como Comprador você pode:
 
 
 
-## 3.1 Requisitos
+## 4.1 Requisitos
 
 - PostgreSQL database;
 
 
 
-## 4. Instalação da aplicação
+## 5. Instalação da aplicação
 
 - <h3>Front-End</h3>
 
@@ -87,7 +89,7 @@ Utilize o comando `"yarn dev"` para inicializar a aplicação.
 
 
 
-## 5. Time de desenvolvedores
+## 6. Time de desenvolvedores
 
 <table>
   <tr>

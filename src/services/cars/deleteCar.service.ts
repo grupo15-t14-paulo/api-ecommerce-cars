@@ -22,7 +22,7 @@ export const deleteCarService = async (id: string): Promise<void> => {
       await deleteCommentService(comment.id);
     });
   }
-  console.log(foundCar?.comments);
+
   if (foundCar?.images.length! > 0) {
     foundCar?.images.forEach(async (img) => {
       await deleteImageService(img.id);

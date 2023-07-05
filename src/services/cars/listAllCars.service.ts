@@ -1,8 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities";
-import { IReturnAllInfoCars } from "../../interfaces/cars.interfaces";
-import { returnAllCarInfoSchema } from "../../schemas/cars.schema";
+import { IReturnAllInfoCarsType, returnAllCarInfoSchema } from "../../schemas/cars.schema";
 
 export const listAllCarsService = async (
   page: number,
@@ -12,12 +11,13 @@ export const listAllCarsService = async (
     color?: string;
     year?: string;
     model?: string;
+    fuel?: string;
     minPrice?: string;
     maxPrice?: string;
     minMileage?: string;
     maxMileage?: string;
   }
-): Promise<IReturnAllInfoCars> => {
+): Promise<IReturnAllInfoCarsType> => {
   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
   const skip = (page - 1) * pageSize;
@@ -27,7 +27,7 @@ export const listAllCarsService = async (
     .leftJoinAndSelect("car.images", "images")
     .leftJoinAndSelect("car.user", "users")
     .skip(skip)
-    .take(pageSize)
+    .take(pageSize);
 
   if (filters.brand) {
     findCars.andWhere("car.brand = :brand", { brand: filters.brand });
@@ -43,6 +43,10 @@ export const listAllCarsService = async (
 
   if (filters.year) {
     findCars.andWhere("car.year = :year", { year: filters.year });
+  }
+
+  if (filters.fuel) {
+    findCars.andWhere("car.typeCar = :typeCar", { typeCar: filters.fuel });
   }
 
   if (filters.minPrice) {
@@ -61,9 +65,18 @@ export const listAllCarsService = async (
     findCars.andWhere("car.mileage <= :maxMileage", { maxMileage: parseInt(filters.maxMileage) });
   }
 
-  const carsAll = await findCars.getMany();
+  const [cars, totalCount] = await findCars.getManyAndCount();
+  const allCars = returnAllCarInfoSchema.parse(cars);
 
-  const cars = returnAllCarInfoSchema.parse(carsAll);
+  const totalPages = Math.ceil(totalCount / (pageSize || totalCount)) || 1;
 
-  return cars;
+  const nextPage = page < totalPages ? page + 1 : null;
+  const prevPage = page > 1 ? page - 1 : null;
+
+  return {
+    nextPage,
+    prevPage,
+    totalPages,
+    cars: allCars,
+  };
 };

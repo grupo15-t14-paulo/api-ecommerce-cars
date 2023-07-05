@@ -2,11 +2,9 @@ import { Address } from "./../entities/address.entities";
 import { z } from "zod";
 import { imageCreateSchema, imageReturnSchema } from "./image.schema";
 import { fuel } from "../entities/cars.entities";
-import {
-  returnUserSchema,
-  returnUserSchemaWithOutAdress,
-} from "./users.schema";
+import { returnUserSchema, returnUserSchemaWithOutAdress } from "./users.schema";
 import { returnPatchComment, userId } from "./comments.schema";
+import { IReturnAllInfoCars } from "../interfaces/cars.interfaces";
 
 export const carCreateSchema = z.object({
   brand: z.string().min(1).max(100),
@@ -24,9 +22,9 @@ export const carCreateSchema = z.object({
 });
 
 const userSchemaGetOne = z.object({
-  id:z.string(),
-  name:z.string()
-})
+  id: z.string(),
+  name: z.string(),
+});
 
 export const returnSchemaWithoutPasswordAll = z.object({
   id: z.string().uuid(),
@@ -57,7 +55,7 @@ export const returnSchemaWithoutPasswordAll = z.object({
       id: z.string().uuid(),
       comment: z.string(),
       createdAt: z.date(),
-      user:userSchemaGetOne
+      user: userSchemaGetOne,
     })
   ),
 });
@@ -138,3 +136,10 @@ export const returnAllCarInfoSchema = returnCarAndUserSchema.array();
 export const returnAllCarsSchema = returnCarSchema.array();
 
 export const carUpdateSchema = carCreateSchema.omit({ images: true }).partial();
+
+export type IReturnAllInfoCarsType = {
+  cars: IReturnAllInfoCars;
+  nextPage: number | null;
+  prevPage: number | null;
+  totalPages: number | number;
+};

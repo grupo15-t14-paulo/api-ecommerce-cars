@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Car, User } from "../entities";
 import { AppError } from "../errors";
+import { Comments } from "../entities/comments.entites";
 
 export const ensureIsOwner = async (
   req: Request,
@@ -16,18 +17,21 @@ export const ensureIsOwner = async (
 
   const user = await userRepository.findOneBy({ id: userAuth.id });
 
-  const carRepository: Repository<Car> = AppDataSource.getRepository(Car);
+  const commentsRepo: Repository<Comments> =
+    AppDataSource.getRepository(Comments);
 
-  const foundCar: Car | null = await carRepository.findOne({
-    where: {
-      id,
-    },
+  const findComment = await commentsRepo.findOne({
+    where: { id: id },
     relations: {
       user: true,
     },
   });
 
-  if (user!.id === foundCar?.user.id) {
+  if (!findComment) {
+    throw new AppError("Comment not found!", 404);
+  }
+
+  if (user!.id === findComment.user.id) {
     return next();
   } else {
     throw new AppError("Not have Autorizarization", 403);

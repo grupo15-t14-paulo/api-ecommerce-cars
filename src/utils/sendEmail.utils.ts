@@ -11,16 +11,19 @@ interface IEmailRequest {
 class EmailService {
   async sendEmail({ to, subject, text }: IEmailRequest) {
     const transporter = createTransport({
+      service: "hotmail",
       host: "smtp-mail.outlook.com",
+      port: 587,
+      secure: false,
       auth: {
-        user: "bernadogui@hotmail.com",
-        pass: "Bernardo1@",
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
     await transporter
       .sendMail({
-        from: "bernadogui@hotmail.com",
+        from: process.env.SMTP_USER,
         to,
         subject,
         html: text,
@@ -43,7 +46,7 @@ class EmailService {
       theme: "default",
       product: {
         name: "Reset Password",
-        link: "https://frontend-ecommerce-cars.vercel.app",
+        link: "https://frontend-ecommerce-cars.vercel.app/",
       },
     });
 

@@ -57,7 +57,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua senha",
-            link: `https://frontend-ecommerce-cars.vercel.app/resetPassword/${resetToken}`,
+            link: `https://frontend-ecommerce-cars.vercel.app/users/resetPassword/${resetToken}`,
           },
         },
         outro:

@@ -12,6 +12,7 @@ export const deleteUserService = async (id: string): Promise<void> => {
       id: id,
     },
     relations: {
+      announcement: true,
       comments: true,
     },
   });

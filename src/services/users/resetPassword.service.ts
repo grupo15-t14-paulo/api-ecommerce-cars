@@ -23,7 +23,11 @@ class ResetPasswordService {
 
     await userRepository.save(user);
 
-    const resetPasswordTemplate = emailService.resetPasswordTemplate(user.name, email, resetToken);
+    const resetPasswordTemplate = emailService.resetPasswordTemplate(
+      user.name,
+      email,
+      resetToken
+    );
 
     await emailService.sendEmail(resetPasswordTemplate);
   }

@@ -18,15 +18,15 @@ export const deleteCarService = async (id: string): Promise<void> => {
   });
 
   if (foundCar?.comments.length! > 0) {
-    foundCar?.comments.forEach(async (comment) => {
+    for (const comment of foundCar?.comments!) {
       await deleteCommentService(comment.id);
-    });
+    }
   }
 
   if (foundCar?.images.length! > 0) {
-    foundCar?.images.forEach(async (img) => {
+    for (const img of foundCar?.images!) {
       await deleteImageService(img.id);
-    });
+    }
   }
 
   await carRepository.remove(foundCar!);

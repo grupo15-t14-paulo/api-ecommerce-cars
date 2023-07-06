@@ -16,16 +16,17 @@ export const deleteUserService = async (id: string): Promise<void> => {
       comments: true,
     },
   });
-  if (user?.announcement) {
-    user?.announcement?.forEach(async (car) => {
+
+  if (user?.announcement?.length! > 0) {
+    for (const car of user?.announcement!) {
       await deleteCarService(car.id);
-    });
+    }
   }
 
   if (user?.comments) {
-    user?.comments.forEach(async (comment) => {
+    for (const comment of user?.comments) {
       await deleteCommentService(comment.id);
-    });
+    }
   }
 
   await userRepository.remove(user!);

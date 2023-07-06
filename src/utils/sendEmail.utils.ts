@@ -43,7 +43,7 @@ class EmailService {
       theme: "default",
       product: {
         name: "Reset Password",
-        link: "http://localhost:5173",
+        link: "https://frontend-ecommerce-cars.vercel.app",
       },
     });
 
@@ -57,7 +57,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua senha",
-            link: `http://localhost:5173/resetPassword/${resetToken}`,
+            link: `https://frontend-ecommerce-cars.vercel.app/resetPassword/${resetToken}`,
           },
         },
         outro:
@@ -71,9 +71,9 @@ class EmailService {
       subject: "Redefinir Senha",
       text: emailBody,
     };
-    return emailTemplate
+    return emailTemplate;
   }
 }
 
-const emailService = new EmailService()
-export {emailService}
+const emailService = new EmailService();
+export { emailService };

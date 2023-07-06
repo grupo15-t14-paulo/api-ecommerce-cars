@@ -5,10 +5,7 @@ import { ICar, ICarReturn, IUpdateCar } from "../../interfaces/cars.interfaces";
 import { returnCarSchema } from "../../schemas/cars.schema";
 import { deleteImageService } from "../images/deleteImage.service";
 
-export const updateCarService = async (
-  carData: IUpdateCar,
-  id: string
-): Promise<ICarReturn> => {
+export const updateCarService = async (carData: IUpdateCar, id: string): Promise<ICarReturn> => {
   const carRepository: Repository<Car> = AppDataSource.getRepository(Car);
   const imgRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
@@ -24,6 +21,8 @@ export const updateCarService = async (
   foundCar?.images.forEach((img) => {
     deleteImageService(img.id);
   });
+
+  console.log(carData);
 
   const images = carData.images?.map((imageData) => {
     const image = imgRepository.create(imageData);

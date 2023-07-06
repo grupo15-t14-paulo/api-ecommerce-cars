@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID } from "crypto";
 import { Repository } from "typeorm";
 import { User } from "../../entities";
 import { AppDataSource } from "../../data-source";
@@ -23,11 +23,7 @@ class ResetPasswordService {
 
     await userRepository.save(user);
 
-    const resetPasswordTemplate = emailService.resetPasswordTemplate(
-      user.name,
-      email,
-      resetToken
-    );
+    const resetPasswordTemplate = emailService.resetPasswordTemplate(user.name, email, resetToken);
 
     await emailService.sendEmail(resetPasswordTemplate);
   }

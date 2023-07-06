@@ -12,8 +12,7 @@ import { carCreateSchema, carUpdateSchema } from "../schemas/cars.schema";
 import { verifyCarExists } from "../middleware/cars/verifyCarExists.middleware";
 import { ensureIsSeller } from "../middleware/ensureIsSeller.middleware";
 import { ensureTokenIsValidMiddleware } from "../middleware/ensureTokenIsValidMiddleware";
-import { ensureIsOwner } from "../middleware/ensureIsSellerAndOwner.middleware";
-import { ensureUserIdExist } from "../middleware/users/ensureUserIdExist.middleware";
+import { ensureIsOwnerCar } from "../middleware/ensureIsOwnerCar.middleware";
 
 export const carRoutes: Router = Router();
 
@@ -29,8 +28,8 @@ carRoutes.post("", ensureIsSeller, ensureDataIsValid(carCreateSchema), createCar
 carRoutes.patch(
   "/:id",
   verifyCarExists,
-  ensureIsOwner,
+  ensureIsOwnerCar,
   ensureDataIsValid(carUpdateSchema),
   updateCarController
 );
-carRoutes.delete("/:id", ensureIsOwner, verifyCarExists, deleteCarController);
+carRoutes.delete("/:id", ensureIsOwnerCar, verifyCarExists, deleteCarController);

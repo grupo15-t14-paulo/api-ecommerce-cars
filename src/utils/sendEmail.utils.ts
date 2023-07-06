@@ -13,14 +13,14 @@ class EmailService {
     const transporter = createTransport({
       host: "smtp-mail.outlook.com",
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: "bernadogui@hotmail.com",
+        pass: "Bernardo1@",
       },
     });
 
     await transporter
       .sendMail({
-        from: process.env.SMTP_USER,
+        from: "bernadogui@hotmail.com",
         to,
         subject,
         html: text,

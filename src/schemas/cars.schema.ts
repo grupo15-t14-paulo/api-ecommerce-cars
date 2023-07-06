@@ -135,7 +135,7 @@ export const returnAllCarInfoSchema = returnCarAndUserSchema.array();
 
 export const returnAllCarsSchema = returnCarSchema.array();
 
-export const carUpdateSchema = carCreateSchema.omit({ images: true }).partial();
+export const carUpdateSchema = carCreateSchema.partial();
 
 export type IReturnAllInfoCarsType = {
   cars: IReturnAllInfoCars;

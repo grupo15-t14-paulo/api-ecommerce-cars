@@ -13,14 +13,14 @@ class EmailService {
     const transporter = createTransport({
       host: "smtp-mail.outlook.com",
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: "bernadogui@hotmail.com",
+        pass: "Bernardo1@",
       },
     });
 
     await transporter
       .sendMail({
-        from: process.env.SMTP_USER,
+        from: "bernadogui@hotmail.com",
         to,
         subject,
         html: text,
@@ -43,7 +43,7 @@ class EmailService {
       theme: "default",
       product: {
         name: "Reset Password",
-        link: "http://localhost:5173",
+        link: "https://frontend-ecommerce-cars.vercel.app",
       },
     });
 
@@ -57,7 +57,7 @@ class EmailService {
           button: {
             color: "#DC4D2F",
             text: "Redefina sua senha",
-            link: `http://localhost:5173/resetPassword/${resetToken}`,
+            link: `https://frontend-ecommerce-cars.vercel.app/users/resetPassword/${resetToken}`,
           },
         },
         outro:
@@ -71,9 +71,9 @@ class EmailService {
       subject: "Redefinir Senha",
       text: emailBody,
     };
-    return emailTemplate
+    return emailTemplate;
   }
 }
 
-const emailService = new EmailService()
-export {emailService}
+const emailService = new EmailService();
+export { emailService };

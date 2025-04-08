@@ -11,6 +11,9 @@
     "build": "tsc",
     "start": "node dist/src/server.js"
   },
+   "engines": {
+    "node": ">=16.13.0"
+  }
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

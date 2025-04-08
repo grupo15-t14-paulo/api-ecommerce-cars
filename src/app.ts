@@ -1,6 +1,7 @@
 import "express-async-errors";
 import express, { Application } from "express";
 import { handleErrors } from "./errors";
+import type { ErrorRequestHandler } from "express";
 import { carRoutes } from "./routes/cars.routes";
 import { imgRoutes } from "./routes/images.routes";
 import { userRoutes } from "./routes/users.routes";
@@ -21,6 +22,6 @@ app.use("/login", loginRoutes);
 app.use("/comments", commentsRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(handleErrors);
+app.use(handleErrors as ErrorRequestHandler);
 
 export default app;

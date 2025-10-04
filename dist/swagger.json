@@ -1,0 +1,702 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "summary": "Create a new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserCreateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "Retrieve a user by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a user by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully"
+                    }
+                }
+            }
+        },
+        "/users/{id}/address": {
+            "patch": {
+                "summary": "Update a user's address by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddressUpdateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User's address updated successfully"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "User login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "example@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful"
+                    }
+                }
+            }
+        },
+        "/cars": {
+            "get": {
+                "summary": "Retrieve all cars"
+            },
+            "post": {
+                "summary": "Create a new car",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarCreateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Car created successfully"
+                    }
+                }
+            }
+        },
+        "/cars/{id}": {
+            "get": {
+                "summary": "Retrieve a car by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car found"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a car by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarUpdateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Car updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a car by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car deleted successfully"
+                    }
+                }
+            }
+        },
+        "/cars/{id}/image": {
+            "patch": {
+                "summary": "Update a car's image by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "required": ["image"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Car's image updated successfully"
+                    }
+                }
+            }
+        },
+        "/comments/{id}": {
+            "post": {
+                "summary": "Create a new comment",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CommentCreateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReturnCommentSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a comment by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CommentUpdateSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReturnPatchComment"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a comment by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment deleted successfully"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserCreateSchema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "example@example.com"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "minLength": 11
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 6,
+                        "maxLength": 255
+                    },
+                    "tel": {
+                        "type": "string",
+                        "minLength": 10,
+                        "example": "62994567899"
+                    },
+                    "dateBirth": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isSeller": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/AddressCreateSchema"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "cpf",
+                    "password",
+                    "tel",
+                    "dateBirth",
+                    "address"
+                ]
+            },
+            "UserUpdateSchema": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "minLength": 11
+                    },
+                    "tel": {
+                        "type": "string",
+                        "minLength": 10,
+                        "example": "62994567899"
+                    },
+                    "dateBirth": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "AddressCreateSchema": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "city": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "state": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 255
+                    },
+                    "zipCode": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 8
+                    }
+                },
+                "required": ["street", "city", "state", "zipCode"]
+            },
+            "AddressUpdateSchema": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "city": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 255
+                    },
+                    "state": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 255
+                    },
+                    "zipCode": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 8
+                    }
+                }
+            },
+            "CarCreateSchema": {
+                "type": "object",
+                "properties": {
+                    "brand": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "model": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "year": {
+                        "type": "string"
+                    },
+                    "typeCar": {
+                        "type": "string",
+                        "enum": ["gasoline", "ethanol", "flex", "diesel"]
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "color": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "fipePrice": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "price": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "imageCover": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 250
+                    },
+                    "isAvailable": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ImageCreateSchema"
+                        }
+                    }
+                },
+                "required": [
+                    "brand",
+                    "model",
+                    "year",
+                    "typeCar",
+                    "mileage",
+                    "color",
+                    "fipePrice",
+                    "price",
+                    "imageCover",
+                    "isAvailable",
+                    "images"
+                ]
+            },
+            "CarUpdateSchema": {
+                "type": "object",
+                "properties": {
+                    "brand": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "model": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "year": {
+                        "type": "string"
+                    },
+                    "typeCar": {
+                        "type": "string",
+                        "enum": ["gasoline", "ethanol", "flex", "diesel"]
+                    },
+                    "mileage": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "color": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "fipePrice": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "price": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "imageCover": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 250
+                    },
+                    "isAvailable": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ImageCreateSchema"
+                        }
+                    }
+                }
+            },
+            "CommentCreateSchema": {
+                "type": "object",
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    }
+                },
+                "required": ["comment"]
+            },
+            "CommentUpdateSchema": {
+                "type": "object",
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserId": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "required": ["id"]
+            },
+            "ReturnCommentSchema": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CommentCreateSchema"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "user": {
+                                "$ref": "#/components/schemas/UserId"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ReturnPatchComment": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CommentCreateSchema"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ImageCreateSchema": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 250
+                    },
+                    "alt": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 250
+                    }
+                },
+                "required": ["url", "alt"]
+            }
+        }
+    }
+}

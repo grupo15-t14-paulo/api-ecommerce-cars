@@ -20,7 +20,8 @@ app.use("/images", imgRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/comments", commentsRoutes);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve as any);
+app.get("/api-docs", swaggerUi.setup(swaggerDocument) as any);
 
 app.use(handleErrors as ErrorRequestHandler);
 
